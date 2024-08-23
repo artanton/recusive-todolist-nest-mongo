@@ -1,62 +1,11 @@
-// import { Injectable } from '@nestjs/common';
-// import { Body, Param } from '@nestjs/common';
-// import { PostTaskDto } from './dto/post-task.dto';
-
-// import { UpdateTaskDto } from './dto/update-task.dto';
-
-// @Injectable()
-// export class TasksService {
-//   getAllTasks() {
-//     return 'get all tasks';
-//   }
-
-//   createTask(@Body() postTaskDto: PostTaskDto) {
-//     return 'New post created';
-//   }
-
-//   updateTask(@Param(':id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-//     return 'Task with id updated';
-//   }
-
-//   removeTask(@Param('id') id: string) {
-//     return 'delete success';
-//   }
-// }
 import { Injectable } from '@nestjs/common';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { Repository } from 'typeorm';
-// import { Task } from './task.entity';
+
 import { PostTaskDto } from './dto/post-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ITask } from './task.model';
 import groupTasksByParentId from './tasks.helper';
-
-// @Injectable()
-// export class TasksService {
-//   constructor(
-//     @InjectRepository(Task)
-//     private readonly taskRepository: Repository<Task>,
-//   ) {}
-
-//   getAllTasks() {
-//     return this.taskRepository.find();
-//   }
-
-//   createTask(postTaskDto: PostTaskDto) {
-//     const task = this.taskRepository.create(postTaskDto);
-//     return this.taskRepository.save(task);
-//   }
-
-//   updateTask(id: string, updateTaskDto: UpdateTaskDto) {
-//     return this.taskRepository.update(id, updateTaskDto);
-//   }
-
-//   removeTask(id: string) {
-//     return this.taskRepository.delete(id);
-//   }
-// }
 
 @Injectable()
 export class TasksService {
