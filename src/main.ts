@@ -6,6 +6,7 @@ async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
+    app.enableCors();
     await app.listen(3000);
 
     console.log(`Database connection successful. Use port: 3000`);
