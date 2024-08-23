@@ -23,7 +23,6 @@ export class TasksService {
   async createTask(postTaskDto: PostTaskDto) {
     const result = await this.taskModel.create(postTaskDto);
 
-    console.log(result);
     return result;
   }
 
