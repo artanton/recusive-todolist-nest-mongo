@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 
 import { PostTaskDto } from './dto/post-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 import { ITask } from './task.model';
 import groupTasksByParentId from './tasks.helper';
 
@@ -31,6 +31,9 @@ export class TasksService {
   }
 
   async updateTask(id: string, updateTaskDto: UpdateTaskDto) {
+    if (!isValidObjectId(id)) {
+      throw new HttpException('Invalid ID format', 400);
+    }
     const result = await this.taskModel.findOneAndUpdate(
       { _id: id },
       updateTaskDto,
@@ -38,10 +41,17 @@ export class TasksService {
         new: true,
       },
     );
+    if (!result) {
+      throw new HttpException('Task not found', 404);
+    }
+
     return result;
   }
 
   async removeTask(id: string) {
+    if (!isValidObjectId(id)) {
+      throw new Error('invalid ID format');
+    }
     const allTask = await this.taskModel.find();
     const taskMap = groupTasksByParentId(allTask);
 
