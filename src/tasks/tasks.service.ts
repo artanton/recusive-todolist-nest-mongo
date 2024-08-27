@@ -7,6 +7,10 @@ import { Model } from 'mongoose';
 import { ITask } from './task.model';
 import groupTasksByParentId from './tasks.helper';
 
+interface ISubTask extends ITask {
+  id: string;
+}
+
 @Injectable()
 export class TasksService {
   constructor(
@@ -41,7 +45,7 @@ export class TasksService {
 
     const deleteTaskChain = async (id: string) => {
       if (taskMap[id]) {
-        taskMap[id].forEach((subtask) => deleteTaskChain(subtask.id));
+        taskMap[id].forEach((subtask: ISubTask) => deleteTaskChain(subtask.id));
       }
       const result = await this.taskModel.findOneAndDelete({ _id: id });
       return result;
