@@ -8,7 +8,7 @@ import { ITask } from './task.model';
 import groupTasksByParentId from './tasks.helper';
 
 interface ISubTask extends ITask {
-  _id: string;
+  id: string;
 }
 
 @Injectable()
@@ -47,9 +47,7 @@ export class TasksService {
 
     const deleteTaskChain = async (id: string) => {
       if (taskMap[id]) {
-        taskMap[id].forEach((subtask: ISubTask) =>
-          deleteTaskChain(subtask._id),
-        );
+        taskMap[id].forEach((subtask: ISubTask) => deleteTaskChain(subtask.id));
       }
       const result = await this.taskModel.findOneAndDelete({ _id: id });
       return result;
