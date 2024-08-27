@@ -6,17 +6,17 @@ import {
   Param,
   Post,
   Patch,
-  // BadRequestException,
-  UseFilters,
+
+  // UseFilters,
 } from '@nestjs/common';
 import { PostTaskDto } from './dto/post-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TasksService } from './tasks.service';
 // import { isValidObjectId } from 'mongoose';
-import { HttpExceptionFilter } from 'src/exception.filter';
+// import { HttpExceptionFilter } from 'src/exception.filter';
 
 @Controller('tasks')
-@UseFilters(HttpExceptionFilter)
+// @UseFilters(HttpExceptionFilter)
 export class TasksController {
   constructor(private readonly taskService: TasksService) {}
 
