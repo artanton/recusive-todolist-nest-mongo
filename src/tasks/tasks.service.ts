@@ -30,11 +30,13 @@ export class TasksService {
     return result;
   }
 
-  async updateTask(filter: { _id: string }, updateTaskDto: UpdateTaskDto) {
+  async updateTask(id: string, updateTaskDto: UpdateTaskDto) {
     const result = await this.taskModel.findOneAndUpdate(
-      filter,
+      { _id: id },
       updateTaskDto,
-      { new: true },
+      {
+        new: true,
+      },
     );
     return result;
   }
