@@ -57,7 +57,7 @@ export class TasksService {
 
   async removeTask(id: string) {
     // if (!isValidObjectId(id)) {
-    //   throw new Error('invalid ID format');
+    //   throw new HttpException('invalid ID format');
     // }
     if (!isValidObjectId(id)) {
       throw new BadRequestException('Invalid ID format');
